@@ -74,6 +74,7 @@ function showAllProducts(array)
                 <h3>From: ${description}</h3>
                 <h4>${price} USD</h4>
                 <h4>${stocks} in storage</h4>
+                <h5>ID: ${id}</h5>
                 <button onclick="editProduct(${id})">Edit</button>
                 <button onclick="deleteProduct(${id})">Delete</button>
             </div>
@@ -81,15 +82,12 @@ function showAllProducts(array)
     }
     mainDivProducts.innerHTML = card;
 }
-function deleteProduct(id)
-{
-    console.log(`${id}`);
-}
-
 function editProduct(id)
 {
-    console.log(`${id}`);
+    console.log(id);
 }
-
+function deleteProduct(id)
+{
+    console.log(id);
+}
 getProducts();
-
