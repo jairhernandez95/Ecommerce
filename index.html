@@ -11,21 +11,16 @@
 </head>
 <body>
     <header>
-      <nav>
-        <div>
-          <button>Add item</button>
-        </div>
-        <div>
-          <input type="text">
-          <button>Search item by name</button>
-        </div>
-      </nav>
+      
     </header>
     <main>
-      <h1>These are the items that you have in storage</h1>
-      <div id="mainDivItems">
+      <div class="mainDivHeader">
+        <h1>Products in storage</h1>
+        <button onclick="alertNewProduct()">Add new product</button>
+        <input type="text">
+        <button onclick="getProduct()">Search item by name</button>
       </div>
+      <div id="mainDivProducts" class="mainDivProducts"></div>
     </main>
-    <footer></footer>
 </body>
 </html>

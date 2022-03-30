@@ -1,4 +1,28 @@
-header > nav
+.mainDivHeader
+{
+    display: grid;
+    grid-template-columns: 30% 10% 20% 10%;
+    justify-content: center;
+    margin-bottom: 2%;
+    height: auto;
+}
+.mainDivProducts
+{
+    display: grid;
+    grid-template-columns: 30% 30%;
+    justify-content: center;
+}
+.individualProduct
+{
+    outline: 1px solid black;
+    border-radius: 5px;
+    padding: 3%;
+}
+footer
+{
+    position: relative;
+}
+footer > nav
 {
     display: flex;
     flex-direction: row;
