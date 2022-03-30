@@ -75,8 +75,8 @@ function showAllProducts(array)
                 <h4>${price} USD</h4>
                 <h4>${stocks} in storage</h4>
                 <h5>ID: ${id}</h5>
-                <button onclick="editProduct(${id})">Edit</button>
-                <button onclick="deleteProduct(${id})">Delete</button>
+                <button onclick="editProduct()">Edit</button>
+                <button onclick="deleteProduct()">Delete</button>
             </div>
             `;
     }
