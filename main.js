@@ -55,7 +55,6 @@ function getProducts()
 function showAllProducts(array)
 {
     let mainDivProducts = document.getElementById("mainDivProducts");
-    console.log(array);
     let name = null;
     let description = null;
     let price = null;
@@ -74,13 +73,28 @@ function showAllProducts(array)
                 <h3>From: ${description}</h3>
                 <h4>${price} USD</h4>
                 <h4>${stocks} in storage</h4>
-                <h5>ID: ${id}</h5>
-                <button onclick="editProduct()">Edit</button>
-                <button onclick="deleteProduct()">Delete</button>
+                <h5>ID: <a href="#" onclick=actionInProduct(this)>${id}</a></h5>
+                <h6>To edit or delete this element just click on the id number</h6>
             </div>
             `;
     }
     mainDivProducts.innerHTML = card;
+}
+function actionInProduct(element)
+{
+    action = prompt("¿Qué acción deseas hacer \n editar (EDIT) o eliminar (DELETE)?");
+    if(action == "EDIT")
+    {
+        editProduct(element.textContent);
+    }
+    else if(action == "DELETE")
+    {
+        deleteProduct(element.textContent);
+    }
+    else if(action != "EDIT" || "DELETE")
+    {
+        alert("Esa no es una acción");
+    }
 }
 function editProduct(id)
 {
@@ -89,5 +103,13 @@ function editProduct(id)
 function deleteProduct(id)
 {
     console.log(id);
+    var config = {
+      method: 'delete',
+      url: `https://items-dab4.restdb.io/rest/products/${id}?apikey=62438d7967937c128d7c92f4`,
+      headers: { }
+    };
+    axios(config)
+    .then(getProducts()).catch(function(error){console.log(error);});
+    
 }
 getProducts();
