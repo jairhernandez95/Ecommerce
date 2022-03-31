@@ -1,34 +1,16 @@
-*
-{
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-.mainDivHeader
-{
-    display: grid;
-    grid-template-columns: 40% 50%;
-    justify-content: center;
-    margin-bottom: 2%;
-    height: auto;
-}
 .mainDivProducts
 {
+    padding-top: 2%;
     display: grid;
-    grid-template-columns: 30% 30%;
+    grid-template-columns: 20% 20% 20% 20%;
+    justify-items: center;
     justify-content: center;
+    row-gap: 3%;
+    column-gap: 2%;
 }
-.individualProduct
+.cardButtonsDivDiv
 {
-    outline: 1px solid black;
-    border-radius: 5px;
-    padding: 3%;
-}
-footer
-{
-    position: relative;
-}
-footer > nav
-{
+    width: auto;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    justify-content: space-between;
 }
