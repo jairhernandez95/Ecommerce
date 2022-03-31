@@ -133,18 +133,54 @@ function editProduct(id)
         showCancelButton: true,
         inputValidator: (value) => 
         {
-            return new Promise((resolve, reject) => {
-                if (value === 'Change name') 
+            return new Promise((resolve) => 
+            {
+                console.log(value);
+                value = String(value);
+                if (value == 'name') 
                 {
-                    resolve(Swal.fire('Entraste'));
-                } 
-                else 
-                {
-                    reject(Swal.fire('Aún no entras'))
+                    // Swal.fire(`You selected change name`);
+                    Swal.fire(
+                        {
+                            title: 'Type the new name',
+                            input: 'text'
+                        });
+                    let newName = document.getElementsByClassName("swal2-input").value;
+                    console.log(newName);
                 }
-              })
+                else if(value =="description")
+                {
+                    // Swal.fire(`You selected change description`);
+                    Swal.fire(
+                        {
+                            title: 'Type the new name',
+                            input: 'text',
+                        });
+                }
+                else if(value =="price")
+                {
+                    // Swal.fire(`You selected change price`);
+                    Swal.fire(
+                        {
+                            title: 'Type the new name',
+                            input: 'text',
+                        });
+                }
+                else if(value =="stocks")
+                {
+                    // Swal.fire(`You selected change stock`);
+                    Swal.fire(
+                        {
+                            title: 'Type the new name',
+                            input: 'text',
+                        });
+                }
+            })
         }
       })
+      if (action) {
+        Swal.fire(`You selected: ${action}`)
+      }
     console.log(id)
     // let action = prompt("What do you want to change? \n name(N), description()D, price(P) or stock(S)");
     // if(action == "N")
