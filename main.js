@@ -82,23 +82,99 @@ function showAllProducts(array)
 }
 function actionInProduct(element)
 {
-    action = prompt("¿Qué acción deseas hacer \n editar (EDIT) o eliminar (DELETE)?");
-    if(action == "EDIT")
+    action = prompt("What action do you want to do \n edit(E) or delete(D)?");
+    if(action == "E")
     {
         editProduct(element.textContent);
     }
-    else if(action == "DELETE")
+    else if(action == "D")
     {
         deleteProduct(element.textContent);
     }
-    else if(action != "EDIT" || "DELETE")
+    else if(action != "E" || "D")
     {
         alert("Esa no es una acción");
     }
 }
 function editProduct(id)
 {
-    console.log(id);
+    let action = prompt("What do you want to change? \n name(N), description()D, price(P) or stock(S)");
+    if(action == "N")
+    {
+        let name = prompt("Type the new name");
+        let data = JSON.stringify(
+            {
+                "name": `${name}`,
+            }
+        );
+        let config = {
+            method: "put",
+            url: `https://items-dab4.restdb.io/rest/products/${id}?x-apikey=62438d7967937c128d7c92f4`,
+            headers: {
+                'x-apikey': '62438d7967937c128d7c92f4',
+                'Content-Type':'application/json'
+            },
+            data : data
+        }
+        axios(config).then(getProducts()).catch(console.log(getProducts()));
+    }
+    else if(action == "D")
+    {
+        let description = prompt("Type the new description");
+        let data = JSON.stringify(
+            {
+                "description": `${description}`,
+            }
+        );
+        let config = {
+            method: "put",
+            url: `https://items-dab4.restdb.io/rest/products/${id}?x-apikey=62438d7967937c128d7c92f4`,
+            headers: {
+                'x-apikey': '62438d7967937c128d7c92f4',
+                'Content-Type':'application/json'
+            },
+            data : data
+        }
+        axios(config).then(getProducts()).catch(console.log(getProducts()));
+    }
+    else if(action == "P")
+    {
+        let price = parseInt(prompt("Type the new price"));
+        let data = JSON.stringify(
+            {
+                "price": `${price}`,
+            }
+        );
+        let config = {
+            method: "put",
+            url: `https://items-dab4.restdb.io/rest/products/${id}?x-apikey=62438d7967937c128d7c92f4`,
+            headers: {
+                'x-apikey': '62438d7967937c128d7c92f4',
+                'Content-Type':'application/json'
+            },
+            data : data
+        }
+        axios(config).then(getProducts()).catch(console.log(getProducts()));
+    }
+    else if(action == "S")
+    {
+        let stocks = parseInt(prompt("Type de new stock"));
+        let data = JSON.stringify(
+            {
+                "stocks": `${stocks}`
+            }
+        );
+        let config = {
+            method: "put",
+            url: `https://items-dab4.restdb.io/rest/products/${id}?x-apikey=62438d7967937c128d7c92f4`,
+            headers: {
+                'x-apikey': '62438d7967937c128d7c92f4',
+                'Content-Type':'application/json'
+            },
+            data : data
+        }
+        axios(config).then(getProducts()).catch(console.log(getProducts()));
+    }
 }
 function deleteProduct(id)
 {
