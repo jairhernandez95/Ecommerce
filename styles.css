@@ -1,6 +1,6 @@
 .mainDivProducts
 {
-    padding-top: 2%;
+    padding-top: 4%;
     display: grid;
     grid-template-columns: 20% 20% 20% 20%;
     justify-items: center;
