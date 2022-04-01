@@ -63,7 +63,7 @@ function getProducts()
       headers: { 
         'x-apikey': '62438d7967937c128d7c92f4'
       },
-      data : data
+      data : data //se puede borrar
     };
     axios(config)
     .then(function (response) {
