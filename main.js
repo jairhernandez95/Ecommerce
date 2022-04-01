@@ -1,36 +1,62 @@
 function alertNewProduct()
 {
-    let nameNewProduct = prompt("Type the name of the new product");
-    let descriptionNameProduct = prompt("Type the descripction of the new product");
-    let priceNewProduct = parseInt(prompt("Type the price of the new product"));
-    let stockNewProduct = parseInt(prompt("Type the stock of the new product"));
-    console.log(nameNewProduct);
-    console.log(descriptionNameProduct);
-    console.log(priceNewProduct);
-    console.log(stockNewProduct);
-    postNewProduct(nameNewProduct, descriptionNameProduct, priceNewProduct, stockNewProduct);
+    Swal.fire(
+        {
+            title: 'Type the next info to add a new product',
+            html:
+                '<input id="swal-input1" class="swal2-input" placeholder="Title">' +
+                '<input id="swal-input2" class="swal2-input" placeholder="Developers">' +
+                '<input id="swal-input3" class="swal2-input" placeholder="Price">' +
+                '<input id="swal-input4" class="swal2-input" placeholder="Stock">',
+            preConfirm: () => 
+            {
+                let nameNewProduct = prompt("Type the name of the new product");
+                let descriptionNameProduct = prompt("Type the descripction of the new product");
+                let priceNewProduct = parseInt(prompt("Type the price of the new product"));
+                let stockNewProduct = parseInt(prompt("Type the stock of the new product"));
+                postNewProduct(nameNewProduct, descriptionNameProduct, priceNewProduct, stockNewProduct);
+            }
+      }
+    );
+    // let nameNewProduct = prompt("Type the name of the new product");
+    // let descriptionNameProduct = prompt("Type the descripction of the new product");
+    // let priceNewProduct = parseInt(prompt("Type the price of the new product"));
+    // let stockNewProduct = parseInt(prompt("Type the stock of the new product"));
+    // console.log(nameNewProduct);
+    // console.log(descriptionNameProduct);
+    // console.log(priceNewProduct);
+    // console.log(stockNewProduct);
+    // postNewProduct(nameNewProduct, descriptionNameProduct, priceNewProduct, stockNewProduct);
 }
 function postNewProduct(name, description, price, stock)
 {
-    var data = JSON.stringify({
-    "name": `${name}`,
-    "description": `${description}`,
-    "price": `${price}`,
-    "stocks": `${stock}`
-    });
-    var config = {
-    method: 'post',
-    url: 'https://items-dab4.restdb.io/rest/products',
-    headers: { 
-        'x-apikey': '62438d7967937c128d7c92f4', 
-        'Content-Type': 'application/json'
-    },
-    data : data
-    };
+    var data = JSON.stringify(
+        {
+            "name": `${name}`,
+            "description": `${description}`,
+            "price": `${price}`,
+            "stocks": `${stock}`
+        }
+    );
+    var config = 
+        {
+            method: 'post',
+            url: 'https://items-dab4.restdb.io/rest/products',
+            headers: { 
+                'x-apikey': '62438d7967937c128d7c92f4', 
+                'Content-Type': 'application/json'
+            },
+            data : data
+        };
     axios(config)
-    .then(getProducts())
-    .catch(function (error) {
-    console.log(error);
+    .then(() => 
+    {
+        Swal.fire("The product was added");
+        getProducts();
+    })
+    .catch(function (error) 
+    {
+        console.log(error);
     });
 }
 function getProducts()
@@ -98,22 +124,6 @@ function showAllProducts(array)
     }
     mainDivProducts.innerHTML = card;
 }
-function actionInProduct(element)
-{
-    action = prompt("What action do you want to do \n edit(E) or delete(D)?");
-    if(action == "E")
-    {
-        editProduct(element.textContent);
-    }
-    else if(action == "D")
-    {
-        deleteProduct(element.textContent);
-    }
-    else if(action != "E" || action != "D")
-    {
-        alert("Esa no es una acción");
-    }
-}
 function editProduct(id)
 {
     const {value: action} = Swal.fire(
@@ -133,46 +143,140 @@ function editProduct(id)
         showCancelButton: true,
         inputValidator: (value) => 
         {
-            return new Promise((resolve) => 
+            return new Promise(() => 
             {
                 console.log(value);
                 value = String(value);
                 if (value == 'name') 
                 {
-                    // Swal.fire(`You selected change name`);
-                    Swal.fire(
+                    const {value : newName} = Swal.fire(
                         {
                             title: 'Type the new name',
-                            input: 'text'
+                            html:
+                                '<input id="swal-input1" class="swal2-input">',
+                            focusConfirm: false,
+                            preConfirm: () =>
+                            {
+                                let name = document.getElementById("swal-input1").value;
+                                let data = JSON.stringify(
+                                    {
+                                        "name": `${name}`,
+                                    }
+                                );
+                                let config = {
+                                    method: "put",
+                                    url: `https://items-dab4.restdb.io/rest/products/${id}?x-apikey=62438d7967937c128d7c92f4`,
+                                    headers: {
+                                        'x-apikey': '62438d7967937c128d7c92f4',
+                                        'Content-Type':'application/json'
+                                    },
+                                    data : data
+                                }
+                                axios(config).then(() => 
+                                {
+                                    Swal.fire("The product was updated successfully");
+                                    getProducts();
+                                }).catch(console.log(getProducts()));
+                            }          
                         });
-                    let newName = document.getElementsByClassName("swal2-input").value;
-                    console.log(newName);
                 }
                 else if(value =="description")
                 {
-                    // Swal.fire(`You selected change description`);
-                    Swal.fire(
+                    const {value : newDescription} = Swal.fire(
                         {
                             title: 'Type the new name',
-                            input: 'text',
+                            html:
+                                '<input id="swal-input1" class="swal2-input">',
+                            focusConfirm: false,
+                            preConfirm: () =>
+                            {
+                                let description = document.getElementById("swal-input1").value;
+                                let data = JSON.stringify(
+                                    {
+                                        "description": `${description}`,
+                                    }
+                                );
+                                let config = {
+                                    method: "put",
+                                    url: `https://items-dab4.restdb.io/rest/products/${id}?x-apikey=62438d7967937c128d7c92f4`,
+                                    headers: {
+                                        'x-apikey': '62438d7967937c128d7c92f4',
+                                        'Content-Type':'application/json'
+                                    },
+                                    data : data
+                                }
+                                axios(config).then(() => 
+                                {
+                                    Swal.fire("The product was updated successfully");
+                                    getProducts();
+                                }).catch(console.log(getProducts()));
+                            }          
                         });
                 }
                 else if(value =="price")
                 {
-                    // Swal.fire(`You selected change price`);
-                    Swal.fire(
+                    const {value : newPrice} = Swal.fire(
                         {
                             title: 'Type the new name',
-                            input: 'text',
+                            html:
+                                '<input id="swal-input1" class="swal2-input">',
+                            focusConfirm: false,
+                            preConfirm: () =>
+                            {
+                                let price = document.getElementById("swal-input1").value;
+                                let data = JSON.stringify(
+                                    {
+                                        "price": `${price}`,
+                                    }
+                                );
+                                let config = {
+                                    method: "put",
+                                    url: `https://items-dab4.restdb.io/rest/products/${id}?x-apikey=62438d7967937c128d7c92f4`,
+                                    headers: {
+                                        'x-apikey': '62438d7967937c128d7c92f4',
+                                        'Content-Type':'application/json'
+                                    },
+                                    data : data
+                                }
+                                axios(config).then(() => 
+                                {
+                                    Swal.fire("The product was updated successfully");
+                                    getProducts();
+                                }).catch(console.log(getProducts()));
+                            }          
                         });
                 }
                 else if(value =="stocks")
                 {
-                    // Swal.fire(`You selected change stock`);
-                    Swal.fire(
+                    const {value : newStock} = Swal.fire(
                         {
                             title: 'Type the new name',
-                            input: 'text',
+                            html:
+                                '<input id="swal-input1" class="swal2-input">',
+                            focusConfirm: false,
+                            preConfirm: () =>
+                            {
+                                let stocks = document.getElementById("swal-input1").value;
+                                let data = JSON.stringify(
+                                    {
+                                        "stocks": `${stocks}`,
+                                    }
+                                );
+                                let config = {
+                                    method: "put",
+                                    url: `https://items-dab4.restdb.io/rest/products/${id}?x-apikey=62438d7967937c128d7c92f4`,
+                                    headers: {
+                                        'x-apikey': '62438d7967937c128d7c92f4',
+                                        'Content-Type':'application/json'
+                                    },
+                                    data : data
+                                }
+                                axios(config).then(() => 
+                                {
+                                    Swal.fire("The product was updated successfully");
+                                    getProducts();
+                                }).catch(console.log(getProducts()));
+                            }          
                         });
                 }
             })
@@ -181,7 +285,7 @@ function editProduct(id)
       if (action) {
         Swal.fire(`You selected: ${action}`)
       }
-    console.log(id)
+    
     // let action = prompt("What do you want to change? \n name(N), description()D, price(P) or stock(S)");
     // if(action == "N")
     // {
@@ -282,27 +386,58 @@ function editProduct(id)
 }
 function deleteProduct(id)
 {
-    console.log(id);
-    let answer = prompt("Are you sure? yes(Y), no(N)");
-    if(answer == "Y")
-    {
-        var config = {
-            method: 'delete',
-            url: `https://items-dab4.restdb.io/rest/products/${id}?apikey=62438d7967937c128d7c92f4`,
-            headers: { }
-          };
-          axios(config).then( () => 
-          {
-              alert("The product was removed");
-              getProducts();
-          }).catch(function(error)
+    Swal.fire(
+        {
+            title: 'Do you want to delete this product?',
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            confirmButtonColor: '#FF0000', 
+        }
+    ).then((result) => 
+        {
+            if (result.isConfirmed) 
+                {
+                    var config = 
+                    {
+                        method: 'delete',
+                        url: `https://items-dab4.restdb.io/rest/products/${id}?apikey=62438d7967937c128d7c92f4`,
+                        headers: { }
+                    };
+                    axios(config).then( () => 
+                    {
+                        alert("The product was removed");
+                        getProducts();
+                    }).catch(function(error)
+                        {
+                            console.log(error);
+                        })
+                } 
+            else if (result.isDenied) 
             {
-                console.log(error);
-            });
-    }
-    else if(answer != "Y")
-    {
-        alert("The product was NOT removed")
-    }
+                Swal.fire('Changes are not saved', '', 'info')
+            }
+        }
+    )
+// let answer = prompt("Are you sure? yes(Y), no(N)");
+// if(answer == "Y")
+// {
+//     var config = {
+//         method: 'delete',
+//         url: `https://items-dab4.restdb.io/rest/products/${id}?apikey=62438d7967937c128d7c92f4`,
+//         headers: { }
+//       };
+//       axios(config).then( () => 
+//       {
+//           alert("The product was removed");
+//           getProducts();
+//       }).catch(function(error)
+//         {
+//             console.log(error);
+//         });
+// }
+// else if(answer != "Y")
+// {
+//     alert("The product was NOT removed")
+// }
 }
 getProducts();
