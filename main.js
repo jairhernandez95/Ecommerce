@@ -1,5 +1,9 @@
 function alertNewProduct()
 {
+    let name = null;
+    let description = null;
+    let price = null;
+    let stock = null;
     Swal.fire(
         {
             title: 'Type the next info to add a new product',
@@ -10,23 +14,14 @@ function alertNewProduct()
                 '<input id="swal-input4" class="swal2-input" placeholder="Stock">',
             preConfirm: () => 
             {
-                let nameNewProduct = prompt("Type the name of the new product");
-                let descriptionNameProduct = prompt("Type the descripction of the new product");
-                let priceNewProduct = parseInt(prompt("Type the price of the new product"));
-                let stockNewProduct = parseInt(prompt("Type the stock of the new product"));
-                postNewProduct(nameNewProduct, descriptionNameProduct, priceNewProduct, stockNewProduct);
+                name = document.getElementById("swal-input1").value;
+                description = document.getElementById("swal-input2").value;
+                price = document.getElementById("swal-input3").value;
+                stock = document.getElementById("swal-input4").value;
+                postNewProduct(name, description, price, stock);
             }
-      }
-    );
-    // let nameNewProduct = prompt("Type the name of the new product");
-    // let descriptionNameProduct = prompt("Type the descripction of the new product");
-    // let priceNewProduct = parseInt(prompt("Type the price of the new product"));
-    // let stockNewProduct = parseInt(prompt("Type the stock of the new product"));
-    // console.log(nameNewProduct);
-    // console.log(descriptionNameProduct);
-    // console.log(priceNewProduct);
-    // console.log(stockNewProduct);
-    // postNewProduct(nameNewProduct, descriptionNameProduct, priceNewProduct, stockNewProduct);
+    }
+    );   
 }
 function postNewProduct(name, description, price, stock)
 {
@@ -124,6 +119,7 @@ function showAllProducts(array)
     }
     mainDivProducts.innerHTML = card;
 }
+getProducts();
 function editProduct(id)
 {
     const {value: action} = Swal.fire(
@@ -405,7 +401,7 @@ function deleteProduct(id)
                     };
                     axios(config).then( () => 
                     {
-                        alert("The product was removed");
+                        Swal.fire("The product was removed");
                         getProducts();
                     }).catch(function(error)
                         {
@@ -440,4 +436,3 @@ function deleteProduct(id)
 //     alert("The product was NOT removed")
 // }
 }
-getProducts();
