@@ -180,7 +180,7 @@ function editProduct(id)
                 {
                     const {value : newDescription} = Swal.fire(
                         {
-                            title: 'Type the new name',
+                            title: 'Type the new developer',
                             html:
                                 '<input id="swal-input1" class="swal2-input">',
                             focusConfirm: false,
@@ -213,7 +213,7 @@ function editProduct(id)
                 {
                     const {value : newPrice} = Swal.fire(
                         {
-                            title: 'Type the new name',
+                            title: 'Type the new price',
                             html:
                                 '<input id="swal-input1" class="swal2-input">',
                             focusConfirm: false,
@@ -246,7 +246,7 @@ function editProduct(id)
                 {
                     const {value : newStock} = Swal.fire(
                         {
-                            title: 'Type the new name',
+                            title: 'Type the new stock',
                             html:
                                 '<input id="swal-input1" class="swal2-input">',
                             focusConfirm: false,
