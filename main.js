@@ -108,7 +108,7 @@ function showAllProducts(array)
                         <h4>${stocks} in storage</h4>
                     </div>
                     <div class="card-footer cardButtonsDiv" valign="bottom">
-                        <h6>What do you want to do with this p\\roduct?</h6>
+                        <h6>What do you want to do with this product?</h6>
                         <div class="cardButtonsDivDiv">
                             <button class="btn btn-outline-warning" type="submit" value="${id}" onclick="editProduct(this.value)">Edit</button>
                             <button class="btn btn-outline-danger" type="submit" value="${id}" onclick="deleteProduct(this.value)">Delete</button>
